@@ -17,4 +17,9 @@ public class UserRepositoryImpl implements UserRepository {
         return user;
     }
 
+    @Override
+    public void register(final LoginUser loginUser) {
+        this.mapper.insert(loginUser);
+    }
+
 }

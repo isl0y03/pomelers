@@ -8,4 +8,6 @@ public interface LoginUserMapper {
 
     LoginUser select(String email);
 
+    void insert(LoginUser loginUser);
+
 }

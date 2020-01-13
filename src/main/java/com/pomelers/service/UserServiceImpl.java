@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.pomelers.domain.entity.LoginUser;
+import com.pomelers.domain.model.SignUpForm;
 import com.pomelers.domain.model.UserDetailsImpl;
 import com.pomelers.domain.repository.UserRepository;
 
@@ -25,9 +26,15 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("User " + username + " not found.");
         }
-        // TODO Password stored in database is non encrypted.
-        final String encoded = this.passwordEncoder.encode(user.getPassword());
-        return new UserDetailsImpl(user.getEmail(), encoded);
+        return new UserDetailsImpl(user.getEmail(), user.getPassword());
+    }
+
+    @Override
+    public void register(final SignUpForm form) {
+        final LoginUser user = new LoginUser();
+        user.setEmail(form.getEmail());
+        user.setPassword(this.passwordEncoder.encode(form.getPassword()));
+        this.repository.register(user);
     }
 
 }
