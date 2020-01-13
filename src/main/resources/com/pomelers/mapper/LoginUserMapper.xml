@@ -10,4 +10,13 @@
     WHERE
       EMAIL = #{email}
   </select>
+  <insert id="insert">
+    INSERT INTO LOGIN_USER (
+      EMAIL,
+      PASSWORD
+    ) VALUES (
+      #{email},
+      #{password}
+    )
+  </insert>
 </mapper>

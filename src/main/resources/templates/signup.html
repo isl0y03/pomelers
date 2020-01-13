@@ -2,10 +2,10 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <title>ログイン</title>
+  <title>ユーザ登録</title>
 </head>
 <body>
-  <form th:action="@{/login}" method="post">
+  <form th:action="@{/signup}" method="post">
 
     <label for="email">メールアドレス</label>
     <input type="text" id="email" name="email">
@@ -15,9 +15,12 @@
     <input type="password" id="password" name="password">
     <br>
 
-    <input type="submit" value="ログイン">
+    <label for="confirm">パスワード(確認用)</label>
+    <input type="password" id="confirm" name="confirm">
+    <br>
+
+    <input type="submit" value="登録">
 
   </form>
-  <a th:href="@{/signup}">新規登録</a>
 </body>
 </html>
