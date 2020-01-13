@@ -4,19 +4,21 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import com.pomelers.domain.model.validator.ConfirmPassword;
 import com.pomelers.domain.model.validator.UniqueEmail;
+import com.pomelers.domain.model.validator.ValidationGroups.Attribute;
+import com.pomelers.domain.model.validator.ValidationGroups.Relation;
 
-@ConfirmPassword
+@ConfirmPassword(groups = Relation.class)
 public class SignUpForm {
 
-    @NotEmpty
-    @Email
-    @UniqueEmail
+    @NotEmpty(groups = Attribute.class)
+    @Email(groups = Attribute.class)
+    @UniqueEmail(groups = Relation.class)
     private String email;
 
-    @NotEmpty
+    @NotEmpty(groups = Attribute.class)
     private String password;
 
-    @NotEmpty
+    @NotEmpty(groups = Attribute.class)
     private String confirm;
 
     public String getEmail() {
