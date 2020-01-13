@@ -5,19 +5,28 @@
   <title>ユーザ登録</title>
 </head>
 <body>
-  <form th:action="@{/signup}" method="post">
+  <form th:action="@{/signup}" method="post" th:object="${form}">
 
     <label for="email">メールアドレス</label>
     <input type="text" id="email" name="email">
     <br>
+    <div th:if="${#fields.hasErrors('email')}">
+      <span th:errors=*{email}></span>
+    </div>
 
     <label for="password">パスワード</label>
     <input type="password" id="password" name="password">
     <br>
+    <div th:if="${#fields.hasErrors('password')}">
+      <span th:errors=*{password}></span>
+    </div>
 
     <label for="confirm">パスワード(確認用)</label>
     <input type="password" id="confirm" name="confirm">
     <br>
+    <div th:if="${#fields.hasErrors('confirm')}">
+      <span th:errors=*{confirm}></span>
+    </div>
 
     <input type="submit" value="登録">
 
