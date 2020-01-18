@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <title>ログイン</title>
+<head th:replace="components/common::header(title = ~{::title}, links = ~{::link}, scripts = ~{::script})">
+  <title>Sign in</title>
+  <!-- Links -->
+  <link>
+  <!-- Stripts -->
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
 </head>
 <body>
-  <form th:action="@{/login}" method="post">
+  <nav th:replace="components/common :: navbar-global"></nav>
 
-    <label for="email">メールアドレス</label>
-    <input type="text" id="email" name="email">
-    <br>
+  <!-- Align center -->
+  <div class="columns">
+    <div class="column is-three-fifths is-offset-one-fifth">
 
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password">
-    <br>
+      <form th:action="@{/login}" method="post" th:object="${form}">
+        <div class="card">
+          <div class="card-header has-background-primary">
+            <p class="card-header-title has-text-white">Sign in</p>
+          </div>
+          <div class="card-content">
+            <!-- Email -->
+            <div th:replace="components/form::field-text(
+                fieldid = 'email',
+                labelname = 'Email',
+                required = false)">
+            </div>
+            <!-- Password -->
+            <div th:replace="components/form::field-password(
+                fieldid = 'password',
+                labelname = 'Password',
+                required = false)">
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="control card-footer-item">
+              <input class="button is-link is-expanded" type="submit" value="Sign in">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="card">
+        <div class="card-content">
+          <a th:href="@{/signup}">Create a new account</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <input type="submit" value="ログイン">
-
-  </form>
-  <a th:href="@{/signup}">新規登録</a>
 </body>
 </html>
