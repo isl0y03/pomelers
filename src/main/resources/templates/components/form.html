@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-  <div th:fragment="field-text(fieldid, labelname)" class="field">
+  <div th:fragment="field-text(fieldid, labelname, required)" class="field">
     <div th:with="hasErrors=${#fields.hasErrors('__${fieldid}__')}">
-      <label class="label" th:for="${fieldid}" th:text="${labelname}"></label>
+      <label class="label" th:for="${fieldid}">
+        <span th:if="${required}" th:text="|*|" class="has-text-danger"></span>
+        [[${labelname}]]
+      </label>
       <div class="control">
         <input class="input" type="text" th:id="${fieldid}" th:name="${fieldid}"
             th:classappend="${hasErrors} ? is-danger">
@@ -12,9 +15,12 @@
     </div>
   </div>
 
-  <div th:fragment="field-password(fieldid, labelname)" class="field">
+  <div th:fragment="field-password(fieldid, labelname, required)" class="field">
     <div th:with="hasErrors=${#fields.hasErrors('__${fieldid}__')}">
-      <label class="label" th:for="${fieldid}" th:text="${labelname}"></label>
+      <label class="label" th:for="${fieldid}">
+        <span th:if="${required}" th:text="|*|" class="has-text-danger"></span>
+        [[${labelname}]]
+      </label>
       <div class="control">
         <input class="input" type="password" th:id="${fieldid}" th:name="${fieldid}"
             th:classappend="${hasErrors} ? is-danger">
