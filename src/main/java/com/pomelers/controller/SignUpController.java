@@ -30,7 +30,7 @@ public class SignUpController {
             return "signup";
         }
         this.userService.register(form);
-        return "redirect:/login";
+        return "redirect:/signin";
     }
 
 }

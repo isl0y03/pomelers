@@ -8,9 +8,9 @@ import com.pomelers.domain.model.SignInForm;
 @Controller
 public class SignInController {
 
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String init(@ModelAttribute("form") final SignInForm form) {
-        return "login";
+        return "signin";
     }
 
 }

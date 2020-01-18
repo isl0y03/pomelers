@@ -41,21 +41,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                        .antMatchers("/login", "/signup").anonymous()
+                        .antMatchers("/signin", "/signup").anonymous()
                         .anyRequest().authenticated()
                         .and()
                 .formLogin()
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/signin")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/login?error")
+                        .failureUrl("/signin?error")
                         .permitAll()
                         .and()
                 .logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/signin?logout")
                         .permitAll();
     }
     //@formatter:on
