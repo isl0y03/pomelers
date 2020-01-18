@@ -2,34 +2,71 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ユーザ登録</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
-  <form th:action="@{/signup}" method="post" th:object="${form}">
-
-    <label for="email">メールアドレス</label>
-    <input type="text" id="email" name="email">
-    <br>
-    <div th:if="${#fields.hasErrors('email')}">
-      <span th:errors=*{email}></span>
+  <nav class="navbar has-background-white-ter">
+    <div class="navbar-brand">
+      <a class="navbar-item" th:href="@{/}"> <img alt="logo"
+        src="../static/images/logo.png" th:src="@{images/logo.png}">
+      </a>
     </div>
+  </nav>
 
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password">
-    <br>
-    <div th:if="${#fields.hasErrors('password')}">
-      <span th:errors=*{password}></span>
+  <!-- Align center -->
+  <div class="columns">
+    <div class="column is-three-fifths is-offset-one-fifth">
+
+      <form th:action="@{/signup}" method="post" th:object="${form}">
+        <div class="card">
+
+          <div class="card-header has-background-primary">
+            <p class="card-header-title has-text-white">Create your account</p>
+          </div>
+
+          <div class="card-content">
+            <!-- Email -->
+            <div class="field" th:with="hasErrors=${#fields.hasErrors('email')}">
+              <label class="label" for="email">Email address</label>
+              <div class="control">
+                <input class="input" type="text" id="email" name="email"
+                    th:classappend="${hasErrors} ? is-danger">
+              </div>
+              <p class="help is-danger" th:if="${hasErrors}" th:errors=*{email}></p>
+            </div>
+
+            <!-- Password -->
+            <div class="field" th:with="hasErrors=${#fields.hasErrors('password')}">
+              <label class="label" for="password">Password</label>
+              <div class="control">
+                <input class="input" type="password" id="password" name="password"
+                    th:classappend="${hasErrors} ? is-danger">
+              </div>
+              <p class="help is-danger" th:if="hasErrors" th:errors=*{password}></p>
+            </div>
+
+            <!-- Confirm password -->
+            <div class="field" th:with="hasErrors=${#fields.hasErrors('confirm')}">
+              <label class="label" for="confirm">Confirm password</label>
+              <div class="control">
+                <input class="input" type="password" id="confirm" name="confirm"
+                    th:classappend="${hasErrors} ? is-danger">
+              </div>
+              <p class="help is-danger" th:if="hasErrors" th:errors=*{confirm}></p>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="control card-footer-item">
+              <input class="button is-link is-expanded" type="submit" value="Sign up">
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-
-    <label for="confirm">パスワード(確認用)</label>
-    <input type="password" id="confirm" name="confirm">
-    <br>
-    <div th:if="${#fields.hasErrors('confirm')}">
-      <span th:errors=*{confirm}></span>
-    </div>
-
-    <input type="submit" value="登録">
-
-  </form>
+  </div>
 </body>
 </html>
