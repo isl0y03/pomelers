@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Common header -->
+<head th:fragment="header(title, links, scripts)">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:replace="${title}">Page title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <th:block th:if="${links} != null" th:replace="${links}"/>
+  <th:block th:if="${scripts} != null" th:replace="${scripts}"/>
+</head>
+
+<body>
+  <!-- Global navigation bar -->
+  <nav th:fragment="navbar-global" class="navbar has-background-white-ter">
+    <div class="navbar-brand">
+      <a class="navbar-item" th:href="@{/}">
+        <img alt="logo" src="../static/images/logo.png" th:src="@{images/logo.png}">
+      </a>
+    </div>
+  </nav>
+</body>
+</html>
