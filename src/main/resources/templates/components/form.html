@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
   <div th:fragment="field-text(fieldid, labelname)" class="field">
-    <div th:with="hasErrors=${#fields.hasErrors(fieldid)}">
+    <div th:with="hasErrors=${#fields.hasErrors('__${fieldid}__')}">
       <label class="label" th:for="${fieldid}" th:text="${labelname}"></label>
       <div class="control">
         <input class="input" type="text" th:id="${fieldid}" th:name="${fieldid}"
@@ -13,7 +13,7 @@
   </div>
 
   <div th:fragment="field-password(fieldid, labelname)" class="field">
-    <div th:with="hasErrors=${#fields.hasErrors(fieldid)}">
+    <div th:with="hasErrors=${#fields.hasErrors('__${fieldid}__')}">
       <label class="label" th:for="${fieldid}" th:text="${labelname}"></label>
       <div class="control">
         <input class="input" type="password" th:id="${fieldid}" th:name="${fieldid}"
