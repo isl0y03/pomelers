@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import com.pomelers.service.CustomAuthenticationFailureHandler;
+import com.pomelers.service.CustomAuthenticationSuccessHandler;
 import com.pomelers.service.UserService;
 
 @Configuration
@@ -30,6 +32,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         final CustomAuthenticationFailureHandler failureHandler = new CustomAuthenticationFailureHandler();
         failureHandler.setDefaultFailureUrl("/signin?error");
         return failureHandler;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 
     @Override
@@ -58,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginProcessingUrl("/signin")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/")
+                        .successHandler(authenticationSuccessHandler())
                         .failureHandler(authenticationFailureHandler())
                         .permitAll()
                         .and()

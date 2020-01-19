@@ -12,8 +12,14 @@ public class UserRepositoryImpl implements UserRepository {
     private LoginUserMapper mapper;
 
     @Override
+    public LoginUser select(final Integer id) {
+        final LoginUser user = this.mapper.selectById(id);
+        return user;
+    }
+
+    @Override
     public LoginUser select(final String email) {
-        final LoginUser user = this.mapper.select(email);
+        final LoginUser user = this.mapper.selectByEmail(email);
         return user;
     }
 

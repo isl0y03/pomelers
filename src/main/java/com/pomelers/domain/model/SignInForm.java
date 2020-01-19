@@ -1,25 +1,16 @@
 package com.pomelers.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SignInForm {
 
+    @Getter
+    @Setter
     private String email;
 
+    @Getter
+    @Setter
     private String password;
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
 
 }
