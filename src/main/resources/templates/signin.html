@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="components/common::header(title = ~{::title}, links = ~{::link}, scripts = ~{::script})">
-  <title>Sign up</title>
+  <title>Sign in</title>
   <!-- Links -->
   <link>
   <!-- Stripts -->
@@ -15,39 +15,43 @@
   <div class="columns">
     <div class="column is-three-fifths is-offset-one-fifth">
 
-      <form th:action="@{/signup}" method="post" th:object="${form}">
+      <form th:action="@{/signin}" method="post" th:object="${form}">
         <div class="card">
           <div class="card-header has-background-primary">
-            <p class="card-header-title has-text-white">Create your account</p>
+            <p class="card-header-title has-text-white">Sign in</p>
           </div>
           <div class="card-content">
+            <!-- Message on authentication failure -->
+            <div th:if="${param.error}" class="notification is-light is-danger"
+                th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+            </div>
             <!-- Email -->
             <div th:replace="components/form::field-text(
                 fieldid = 'email',
-                labelname = 'Email address',
-                required = true)">
+                labelname = 'Email',
+                required = false)">
             </div>
             <!-- Password -->
             <div th:replace="components/form::field-password(
                 fieldid = 'password',
                 labelname = 'Password',
-                required = true)">
-            </div>
-            <!-- Confirm password -->
-            <div th:replace="components/form::field-password(
-                fieldid = 'confirm',
-                labelname = 'Confirm password',
-                required = true)">
+                required = false)">
             </div>
           </div>
           <div class="card-footer">
             <div class="control card-footer-item">
-              <input class="button is-link is-expanded" type="submit" value="Sign up">
+              <input class="button is-link is-expanded" type="submit" value="Sign in">
             </div>
           </div>
         </div>
       </form>
+      <div class="card">
+        <div class="card-content">
+          <a th:href="@{/signup}">Create a new account</a>
+        </div>
+      </div>
     </div>
   </div>
+
 </body>
 </html>

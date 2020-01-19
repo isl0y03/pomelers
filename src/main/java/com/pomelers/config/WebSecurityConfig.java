@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import com.pomelers.service.CustomAuthenticationFailureHandler;
 import com.pomelers.service.UserService;
 
 @Configuration
@@ -21,6 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        final CustomAuthenticationFailureHandler failureHandler = new CustomAuthenticationFailureHandler();
+        failureHandler.setDefaultFailureUrl("/signin?error");
+        return failureHandler;
     }
 
     @Override
@@ -41,21 +50,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                        .antMatchers("/login", "/signup").anonymous()
+                        .antMatchers("/signin", "/signup").anonymous()
                         .anyRequest().authenticated()
                         .and()
                 .formLogin()
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/signin")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/login?error")
+                        .failureHandler(authenticationFailureHandler())
                         .permitAll()
                         .and()
                 .logout()
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutUrl("/signout")
+                        .logoutSuccessUrl("/signin?signout")
                         .permitAll();
     }
     //@formatter:on
