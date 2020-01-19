@@ -21,6 +21,10 @@
             <p class="card-header-title has-text-white">Sign in</p>
           </div>
           <div class="card-content">
+            <!-- Message on authentication failure -->
+            <div th:if="${param.error}" class="notification is-light is-danger"
+                th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+            </div>
             <!-- Email -->
             <div th:replace="components/form::field-text(
                 fieldid = 'email',
