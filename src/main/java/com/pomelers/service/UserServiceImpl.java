@@ -6,8 +6,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.pomelers.domain.entity.LoginUser;
+import com.pomelers.domain.model.AuthenticatedUser;
+import com.pomelers.domain.model.CustomUserDetailsImpl;
 import com.pomelers.domain.model.SignUpForm;
-import com.pomelers.domain.model.UserDetailsImpl;
 import com.pomelers.domain.repository.UserRepository;
 
 
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("User " + username + " not found.");
         }
-        return new UserDetailsImpl(user.getEmail(), user.getPassword());
+        final AuthenticatedUser authenticated = new AuthenticatedUser(user.getId(), user.getUsername());
+        return new CustomUserDetailsImpl(user.getEmail(), user.getPassword(), authenticated);
     }
 
     @Override

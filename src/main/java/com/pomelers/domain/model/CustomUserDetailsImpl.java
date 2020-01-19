@@ -5,18 +5,24 @@ import java.util.Collection;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class UserDetailsImpl implements UserDetails {
+public class CustomUserDetailsImpl implements CustomUserDetails {
 
     @Getter
     private final String username;
 
     @Getter
     private final String password;
+
+    private final AuthenticatedUser authenticated;
+
+    @Override
+    public AuthenticatedUser getAuthenticatedUser() {
+        return this.authenticated;
+    }
 
     /**
      * @return ダミーの権限リスト
