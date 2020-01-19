@@ -6,17 +6,17 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
+    @Getter
     private final String username;
 
+    @Getter
     private final String password;
-
-    public UserDetailsImpl(final String username, final String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     /**
      * @return ダミーの権限リスト
@@ -26,16 +26,6 @@ public class UserDetailsImpl implements UserDetails {
         final List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
         return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @Override
