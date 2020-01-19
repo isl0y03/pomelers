@@ -22,6 +22,11 @@ public class SignUpForm {
     @NotEmpty(groups = Attribute.class)
     @Getter
     @Setter
+    private String username;
+
+    @NotEmpty(groups = Attribute.class)
+    @Getter
+    @Setter
     private String password;
 
     @NotEmpty(groups = Attribute.class)

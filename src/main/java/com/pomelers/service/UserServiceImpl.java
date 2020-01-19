@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public void register(final SignUpForm form) {
         final LoginUser user = new LoginUser();
         user.setEmail(form.getEmail());
+        user.setUsername(form.getUsername());
         user.setPassword(this.passwordEncoder.encode(form.getPassword()));
         this.repository.register(user);
     }

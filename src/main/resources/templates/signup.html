@@ -27,6 +27,12 @@
                 labelname = 'Email address',
                 required = true)">
             </div>
+            <!-- Username -->
+            <div th:replace="components/form::field-text(
+                fieldid = 'username',
+                labelname = 'Username',
+                required = true)">
+            </div>
             <!-- Password -->
             <div th:replace="components/form::field-password(
                 fieldid = 'password',

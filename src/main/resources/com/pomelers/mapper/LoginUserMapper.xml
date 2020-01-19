@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pomelers.mapper.LoginUserMapper">
-  <select id="select" resultType="com.pomelers.domain.entity.LoginUser">
+  <select id="selectByEmail" resultType="com.pomelers.domain.entity.LoginUser">
     SELECT
+      ID,
       EMAIL,
+      USERNAME,
       PASSWORD
     FROM
       LOGIN_USER
     WHERE
       EMAIL = #{email}
   </select>
+  <select id="selectById" resultType="com.pomelers.domain.entity.LoginUser">
+    SELECT
+      ID,
+      EMAIL,
+      USERNAME,
+      PASSWORD
+    FROM
+      LOGIN_USER
+    WHERE
+      ID = #{id}
+  </select>
   <insert id="insert">
     INSERT INTO LOGIN_USER (
       EMAIL,
+      USERNAME,
       PASSWORD
     ) VALUES (
       #{email},
+      #{username},
       #{password}
     )
   </insert>

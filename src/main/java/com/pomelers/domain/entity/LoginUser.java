@@ -7,7 +7,15 @@ public class LoginUser {
 
     @Getter
     @Setter
+    private Integer id;
+
+    @Getter
+    @Setter
     private String email;
+
+    @Getter
+    @Setter
+    private String username;
 
     @Getter
     @Setter

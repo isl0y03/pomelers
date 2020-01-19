@@ -6,7 +6,9 @@ import com.pomelers.domain.entity.LoginUser;
 @Mapper
 public interface LoginUserMapper {
 
-    LoginUser select(String email);
+    LoginUser selectById(Integer id);
+
+    LoginUser selectByEmail(String email);
 
     void insert(LoginUser loginUser);
 
