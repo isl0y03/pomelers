@@ -1,9 +1,6 @@
 package com.pomelers.domain.kbn;
 
-import java.util.stream.Stream;
-import lombok.NonNull;
-
-public enum Visibility {
+public enum Visibility implements EnumField {
     PUBLIC("1"),
     PROJECT("2"),
     PRIVATE("3"),
@@ -15,13 +12,8 @@ public enum Visibility {
     }
 
     @Override
-    public String toString() {
+    public String value() {
         return this.value;
     }
 
-    public static Visibility toEnum(@NonNull final String value) {
-        return Stream.of(Visibility.values())
-                .filter(it -> value.equals(it.toString()))
-                .findFirst().orElse(PUBLIC);
-    }
 }
