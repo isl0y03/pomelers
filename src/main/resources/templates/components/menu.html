@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <aside class="menu" th:fragment="side-menu">
+    <p class="menu-label">
+      Channels
+      <a class="icon is-right">
+        <i class="fas fa-plus"></i>
+      </a>
+    </p>
+    <ul class="menu-list" th:each="channel : ${channels}">
+      <li>
+        <a>
+	        <span class="icon is-left">
+            <i th:if="${channel.visibility == T(com.pomelers.domain.kbn.Visibility).PUBLIC}"  class="fas fa-user-friends"></i>
+            <i th:if="${channel.visibility == T(com.pomelers.domain.kbn.Visibility).PROJECT}" class="fas fa-folder-open"></i>
+            <i th:if="${channel.visibility == T(com.pomelers.domain.kbn.Visibility).PRIVATE}" class="fas fa-lock"></i>
+	        </span>
+          [[${channel.name}]]
+        </a>
+      </li>
+    </ul>
+  </aside>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pomelers.mapper.ChannelMapper">
+  <select id="findByUserid" resultType="com.pomelers.domain.entity.Channel">
+    SELECT
+      *
+    FROM
+      CHANNEL CH
+      INNER JOIN
+        USER_CHANNELS UCH
+        ON CHANNELID = CH.ID
+    WHERE
+      UCH.USERID = #{userid}
+    ORDER BY
+      CH.VISIBILITY,
+      CH.NAME
+  </select>
+</mapper>
